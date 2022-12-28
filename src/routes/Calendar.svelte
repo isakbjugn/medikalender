@@ -144,7 +144,8 @@
 	}
 
 	.counter-viewport {
-		height: 4em;
+		display: block;
+		overflow: auto;
 		align-items: center;
 	}
 
