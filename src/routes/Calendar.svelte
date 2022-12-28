@@ -150,7 +150,7 @@
 
 	.counter-input {
 		height: 100%;
-		width: 4em;
+		width: 3em;
 		font-size: 4em;
 		border: 0;
 		background: transparent;
@@ -169,28 +169,5 @@
 	input[type=number]::-webkit-inner-spin-button, 
 	input[type=number]::-webkit-outer-spin-button { 
 		-webkit-appearance: none;
-	}
-
-	.counter-viewport strong {
-		position: absolute;
-		display: flex;
-		width: 100%;
-		height: 100%;
-		font-weight: 400;
-		color: var(--color-theme-1);
-		font-size: 4rem;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.counter-digits {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-	}
-
-	.hidden {
-		top: -100%;
-		user-select: none;
 	}
 </style>
