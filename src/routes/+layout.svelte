@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>Laget av Isak Kyrre Lichtwarck Bjugn (isakbjugn(at)gmail.com)</p>
 	</footer>
 </div>
 
