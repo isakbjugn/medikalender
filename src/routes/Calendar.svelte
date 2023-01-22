@@ -72,6 +72,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		align-items: center;
+		background-color: transparent;
 	}
 
 	@media screen and (max-width: 768px) {
