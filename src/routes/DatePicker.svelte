@@ -55,8 +55,9 @@
 
   <button class="datepicker-button">
     <i class="fa-regular fa-calendar" />
-    <input type="date" bind:value={dateStr} class="datepicker" />
   </button>
+  
+  <input type="date" bind:value={dateStr} class="datepicker" />
 </div>
 
 <style>
