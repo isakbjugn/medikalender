@@ -74,10 +74,6 @@
     font-size: 2rem;
   }
 
-  .counter button:hover {
-		background-color: var(--color-bg-1);
-	}
-
   i {
     font-size: 0.75em;
 		color: #444;
