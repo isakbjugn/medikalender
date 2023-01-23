@@ -77,6 +77,8 @@
     height: 0;
     border: none;
     background-color: transparent;
+    color: transparent;
+    opacity: 0;
   }
 
 	.counter-viewport {
