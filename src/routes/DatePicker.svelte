@@ -1,9 +1,27 @@
 <script>
+  import { onMount } from 'svelte';
+
   export let date = new Date();
   let dateStr = date.toISOString().split('T')[0]
   $: parsedDate = new Date(Date.parse(dateStr));
   $: formattedDate = print_date(parsedDate);
   $: updateDate(dateStr);
+
+
+  onMount(() => {
+    const button = document.querySelector(".datepicker-button");
+    const browserInput = document.querySelector(".datepicker");
+
+    // @ts-ignore
+    button.addEventListener("click", () => {
+      try {
+        // @ts-ignore
+        browserInput.showPicker();
+      } catch (error) {
+        // Fall back to another picker mechanism
+      }
+    });
+  });
 
   /**
 	 * @param {String} dateStr
@@ -22,17 +40,20 @@
 		};
 		// @ts-ignore
 		return dateToPrint.toLocaleDateString("no-NO", options)
-	}
+	
+  }
+
 </script>
 
 <div class="counter">
-
 	<div class="counter-viewport">
-		<input type="text" bind:value={formattedDate} class="counter-input">
-	</div>
-  <div class="datepicker-viewport">
-		<input type="date" bind:value={dateStr} class="datepicker-icon">
-	</div>
+    <input type="text" bind:value={formattedDate} class="counter-input">
+  </div>
+
+  <button class="datepicker-button">
+    <i class="fa-regular fa-calendar" />
+    <input type="date" bind:value={dateStr} class="datepicker" />
+  </button>
 </div>
 
 <style>
@@ -44,6 +65,34 @@
 		background-color: transparent;
 	}
 
+  .counter button {
+    width: 2em;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background-color: transparent;
+    touch-action: manipulation;
+    font-size: 2rem;
+  }
+
+  .counter button:hover {
+		background-color: var(--color-bg-1);
+	}
+
+  i {
+    font-size: 0.75em;
+		color: #444;
+  }
+
+  .datepicker {
+    width: 0;
+    height: 0;
+    border: none;
+    background-color: transparent;
+  }
+
 	.counter-viewport {
 		display: block;
 		overflow: hidden;
@@ -52,7 +101,7 @@
 	}
 
 	.counter-input {
-    margin-left: 30px;
+    margin-left: 15px;
 		width: 4em;
 		font-size: 3em;
 		border: 0;
@@ -66,16 +115,4 @@
 	.counter-input:hover {
 		border: none;
 	}
-
-  .datepicker-viewport {
-    margin: auto 10px;
-	}
-
-  .datepicker-icon {
-    width: 20px;
-    font-size: 1em;
-    overflow: hidden;
-		background: transparent;
-		border: 0;
-  }
 </style>
