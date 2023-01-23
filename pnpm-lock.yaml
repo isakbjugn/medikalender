@@ -7,6 +7,8 @@ specifiers:
   '@sveltejs/adapter-vercel': ^1.0.0
   '@sveltejs/kit': ^1.0.0
   '@types/cookie': ^0.5.1
+  date-fns: ^2.29.3
+  date-picker-svelte: ^2.2.5
   eslint: ^8.28.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
@@ -17,6 +19,10 @@ specifiers:
   typescript: ^4.9.3
   vite: ^4.0.0
   vitest: ^0.25.3
+
+dependencies:
+  date-fns: 2.29.3
+  date-picker-svelte: 2.2.5
 
 devDependencies:
   '@fontsource/fira-mono': 4.5.10
@@ -678,6 +684,15 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
+    dev: false
+
+  /date-picker-svelte/2.2.5:
+    resolution: {integrity: sha512-cexGp5ugTLQqxpjoBsn3JQOGVsBwRpeHj76dwtEPCIyc4w0m5H/Zv6GkqRJd8aJSlo2uK21Dx4QnnCh7rLVh4g==}
+    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}

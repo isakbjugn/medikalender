@@ -1,37 +1,11 @@
 <script>
-  import { onMount } from "svelte";
-
+  import { DatePicker, localeFromDateFnsLocale } from 'date-picker-svelte'
+	import { nb } from 'date-fns/locale/index.js'
+  import { onMount } from 'svelte';
+  
   export let date = new Date();
-  let dateStr = date.toISOString().split('T')[0]
-  $: parsedDate = new Date(Date.parse(dateStr));
-  $: formattedDate = print_date(parsedDate);
-  $: updateDate(dateStr);
-  /**
-	 * @type HTMLInputElement
-	 */
-
-  onMount(() => {
-    const button = document.querySelector(".datepicker-button");
-    const dateInput = document.querySelector(".datepicker");
-
-    //@ts-ignore
-    button.addEventListener("click", () => {
-      try {
-        //@ts-ignore
-        dateInput.showPicker();
-      } catch (error) {
-        alert("showPicker feilet!")
-        // Fall back to another picker mechanism
-      }
-    });
-  })
-
-  /**
-	 * @param {String} dateStr
-	 */
-  const updateDate = (dateStr) => {
-    date = new Date(Date.parse(dateStr));
-  }
+  const locale = localeFromDateFnsLocale(nb);
+  let datePickerVisible = false;
 
   /**
 	 * @param {Date} dateToPrint
@@ -43,21 +17,47 @@
 		};
 		// @ts-ignore
 		return dateToPrint.toLocaleDateString("no-NO", options)
-	
   }
+
+  onMount(() => {
+    document.addEventListener("click", (event) => {
+      const datePicker = document.querySelector(".datepicker");
+      const datePickerButton = document.querySelector(".datepicker-button");
+      let targetElement = event.target;
+
+      do {
+        if (targetElement == datePickerButton) {
+          datePickerVisible = !datePickerVisible;
+          return
+        }
+        if (targetElement == datePicker) {
+          return
+        }
+        // @ts-ignore
+        targetElement = targetElement.parentNode; 
+      } while (targetElement);
+      datePickerVisible = false;
+    })
+  })
 
 </script>
 
 <div class="counter">
-	<div class="counter-viewport">
-    <input type="text" bind:value={formattedDate} class="counter-input">
+  <div class="counter-viewport">
+    <input type="text" value={print_date(date)} class="counter-input" readonly>
   </div>
 
   <button class="datepicker-button">
     <i class="fa-regular fa-calendar" />
   </button>
-  
-  <input type="date" bind:value={dateStr} class="datepicker" />
+
+  <div class="datepicker" hidden={!datePickerVisible}>
+    <DatePicker
+      bind:value={date}
+      {locale}
+      on:select={() => datePickerVisible = false}
+    />
+  </div>
 </div>
 
 <style>
@@ -67,6 +67,16 @@
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 		margin: 1rem 0;
 		background-color: transparent;
+    position: relative;
+	}
+
+  .counter > :global(body) {
+		--date-picker-foreground: black;
+		--date-picker-background: transparent;
+		--date-picker-highlight-border: hsl(var(--deg), 98%, 49%);
+		--date-picker-highlight-shadow: hsla(var(--deg), 98%, 49%, 50%);
+		--date-picker-selected-color: hsl(var(--deg), 100%, 85%);
+		--date-picker-selected-background: hsla(var(--deg), 98%, 49%, 20%);
 	}
 
   .counter button {
@@ -91,12 +101,8 @@
   }
 
   .datepicker {
-    width: 0;
-    height: 0;
-    border: none;
-    background-color: transparent;
-    color: transparent;
-    opacity: 0;
+    position: absolute;
+    top: 60px;
   }
 
 	.counter-viewport {
