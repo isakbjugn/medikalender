@@ -30,5 +30,9 @@
 		"vite": "^4.0.0",
 		"vitest": "^0.25.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"date-fns": "^2.29.3",
+		"date-picker-svelte": "^2.2.5"
+	}
 }
