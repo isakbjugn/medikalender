@@ -29,6 +29,15 @@
 	
   }
 
+  const printShowPickerInfo = () => {
+    if ('showPicker' in HTMLInputElement.prototype) {
+      alert("showPicker støttes!")
+    } else {
+      alert("showPicker støttes ikke!")
+    }
+    datePicker.showPicker();
+  }
+
 </script>
 
 <div class="counter">
@@ -41,7 +50,7 @@
     <input bind:this={datePicker} type="date" bind:value={dateStr} class="datepicker" />
   </button>
 
-  <button on:click={() => datePicker.showPicker()} >Kul knapp!</button>
+  <button on:click={() => printShowPickerInfo()} >Kul knapp!</button>
 </div>
 
 <style>
