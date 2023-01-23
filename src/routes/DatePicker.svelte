@@ -1,27 +1,13 @@
 <script>
-  import { onMount } from 'svelte';
-
   export let date = new Date();
   let dateStr = date.toISOString().split('T')[0]
   $: parsedDate = new Date(Date.parse(dateStr));
   $: formattedDate = print_date(parsedDate);
   $: updateDate(dateStr);
-
-
-  onMount(() => {
-    const button = document.querySelector(".datepicker-button");
-    const browserInput = document.querySelector(".datepicker");
-
-    // @ts-ignore
-    button.addEventListener("click", () => {
-      try {
-        // @ts-ignore
-        browserInput.showPicker();
-      } catch (error) {
-        // Fall back to another picker mechanism
-      }
-    });
-  });
+  /**
+	 * @type HTMLInputElement
+	 */
+  let datePicker;
 
   /**
 	 * @param {String} dateStr
@@ -50,9 +36,9 @@
     <input type="text" bind:value={formattedDate} class="counter-input">
   </div>
 
-  <button class="datepicker-button">
+  <button on:click={() => datePicker.showPicker()} class="datepicker-button">
     <i class="fa-regular fa-calendar" />
-    <input type="date" bind:value={dateStr} class="datepicker" />
+    <input bind:this={datePicker} type="date" bind:value={dateStr} class="datepicker" />
   </button>
 </div>
 

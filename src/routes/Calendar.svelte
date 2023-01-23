@@ -10,6 +10,9 @@
 	$: next_date = find_next_day(number_of_doses, doses_daily, start_date);
 	$: next_date_str = print_date(next_date);
 	$: holiday_description = get_holiday_description(next_date, holidays);
+	$: holiday_description_view = holidays.length === 0
+		? ""
+		: ` (${holiday_description})`;
 	$: date_style = check_if_red_day(holiday_description); 
 	/**
 	 * @type {any[]}
@@ -63,7 +66,7 @@
 	</div>
 	<div class="info">
 		<p>Første dag uten medisin:</p>
-		<strong>{next_date_str} </strong><strong class={date_style}> ({holiday_description})</strong>
+		<strong>{next_date_str} </strong><strong class={date_style}>{holiday_description_view}</strong>
 	</div>
 </div>
 

@@ -10,7 +10,7 @@
 	</button>
 	
 	<div class="counter-viewport">
-		<input type=number bind:value={value} min=1 class="counter-input">
+		<input type="number" bind:value={value} min=1 class="counter-input">
 	</div>
 
 	<button on:click={() => (value += 1)} aria-label="Increase the counter by one">
@@ -78,5 +78,10 @@
   -webkit-appearance: textfield;
      -moz-appearance: textfield;
           appearance: textfield;
+	}
+	
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button { 
+		-webkit-appearance: none;
 	}
 </style>
