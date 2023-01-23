@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   export let date = new Date();
   let dateStr = date.toISOString().split('T')[0]
   $: parsedDate = new Date(Date.parse(dateStr));
@@ -7,7 +9,22 @@
   /**
 	 * @type HTMLInputElement
 	 */
-  let datePicker;
+
+  onMount(() => {
+    const button = document.querySelector(".datepicker-button");
+    const dateInput = document.querySelector(".datepicker");
+
+    //@ts-ignore
+    button.addEventListener("click", () => {
+      try {
+        //@ts-ignore
+        dateInput.showPicker();
+      } catch (error) {
+        alert("showPicker feilet!")
+        // Fall back to another picker mechanism
+      }
+    });
+  })
 
   /**
 	 * @param {String} dateStr
@@ -29,15 +46,6 @@
 	
   }
 
-  const printShowPickerInfo = () => {
-    if ('showPicker' in HTMLInputElement.prototype) {
-      alert("showPicker støttes!")
-    } else {
-      alert("showPicker støttes ikke!")
-    }
-    datePicker.showPicker();
-  }
-
 </script>
 
 <div class="counter">
@@ -45,12 +53,10 @@
     <input type="text" bind:value={formattedDate} class="counter-input">
   </div>
 
-  <button on:click={() => datePicker.showPicker()} class="datepicker-button">
+  <button class="datepicker-button">
     <i class="fa-regular fa-calendar" />
-    <input bind:this={datePicker} type="date" bind:value={dateStr} class="datepicker" />
+    <input type="date" bind:value={dateStr} class="datepicker" />
   </button>
-
-  <button on:click={() => printShowPickerInfo()} >Kul knapp!</button>
 </div>
 
 <style>
@@ -72,6 +78,10 @@
     background-color: transparent;
     touch-action: manipulation;
     font-size: 2rem;
+  }
+
+  .counter button:hover {
+    background-color: var(--color-bg-1);
   }
 
   i {
