@@ -19,9 +19,9 @@
 body {
 	min-height: 100vh;
 	margin: 0;
-	background-attachment: scroll;
+	background-attachment: fixed;
 	background-color: var(--color-bg-1);
-	background-size: 100vh 100vw;
+	background-size: 100% 100%;
 	background-image: radial-gradient(
 			50% 50% at 50% 50%,
 			rgba(255, 255, 255, 0.75) 0%,
