@@ -1,6 +1,6 @@
 <script>
   import { DatePicker, localeFromDateFnsLocale } from 'date-picker-svelte'
-	import { nb } from 'date-fns/locale'
+	import { nb } from 'date-fns/locale/index.js'
   import { onMount } from 'svelte';
   
   export let date = new Date();
