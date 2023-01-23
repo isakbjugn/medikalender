@@ -20,6 +20,13 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+	}
+
+	.app::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 	}
 
 	main {
