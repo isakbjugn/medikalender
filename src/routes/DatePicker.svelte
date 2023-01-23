@@ -36,7 +36,7 @@
     <input type="text" bind:value={formattedDate} class="counter-input">
   </div>
 
-  <button on:click={() => datePicker.showPicker()} class="datepicker-button">
+  <button on:touchend={() => datePicker.showPicker()} on:click={() => datePicker.showPicker()} class="datepicker-button">
     <i class="fa-regular fa-calendar" />
     <input bind:this={datePicker} type="date" bind:value={dateStr} class="datepicker" />
   </button>
