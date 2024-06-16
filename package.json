@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@fontsource/fira-mono": "^5.0.13",
 		"date-fns": "^3.6.0",
-		"date-picker-svelte": "^2.13.0"
+		"date-picker-svelte": "^2.13.0",
+		"svelte-preprocess-import-assets": "^1.1.0"
 	}
 }
