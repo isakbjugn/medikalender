@@ -27,3 +27,13 @@ export const find_next_day = (doses: number, doses_daily: number, start_day: Dat
   const begin_date = new Date(start_day);
   return new Date(begin_date.setDate(begin_date.getDate() + treatment_days));
 }
+
+export const get_first_day_of_last_year = (): Date => {
+  const today = new Date();
+  return new Date(today.getFullYear() - 1, 0, 1);
+}
+
+export const get_last_day_of_next_year = (): Date => {
+  const today = new Date();
+  return new Date(today.getFullYear() + 1, 11, 31);
+}

@@ -2,6 +2,10 @@
   import { DatePicker, localeFromDateFnsLocale } from 'date-picker-svelte'
 	import { nb } from 'date-fns/locale'
   import { onMount } from 'svelte';
+  import {
+    get_first_day_of_last_year,
+    get_last_day_of_next_year
+  } from '$lib/utils/date-utils';
   
   export let date = new Date();
   const locale = localeFromDateFnsLocale(nb);
@@ -54,6 +58,8 @@
   <div class="datepicker" hidden={!datePickerVisible}>
     <DatePicker
       bind:value={date}
+      min={get_first_day_of_last_year()}
+      max={get_last_day_of_next_year()}
       {locale}
       on:select={() => datePickerVisible = false}
     />
