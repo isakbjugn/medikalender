@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import DatePicker from './DatePicker.svelte';
-	import IntPicker from './IntPicker.svelte';
-	import { get_holiday_description, find_next_day } from './date-utils';
+	import IntPicker from '$lib/components/IntPicker.svelte';
+	import { get_holiday_description, find_next_day } from '../utils/date-utils';
 
 	let number_of_doses = 30;
 	let doses_daily = 1;
