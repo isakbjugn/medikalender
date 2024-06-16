@@ -1,27 +1,15 @@
-<script>
+<script lang="ts">
   import { DatePicker, localeFromDateFnsLocale } from 'date-picker-svelte'
 	import { nb } from 'date-fns/locale'
   import { onMount } from 'svelte';
   import {
     get_first_day_of_last_year,
-    get_last_day_of_next_year
+    get_last_day_of_next_year, toNorwegianShortDateString
   } from '$lib/utils/date-utils';
   
   export let date = new Date();
   const locale = localeFromDateFnsLocale(nb);
   let datePickerVisible = false;
-
-  /**
-	 * @param {Date} dateToPrint
-	 */
-	 const print_date = (dateToPrint) => {
-		const options = {
-			month: "short",
-			day: "numeric"
-		};
-		// @ts-ignore
-		return dateToPrint.toLocaleDateString("no-NO", options)
-  }
 
   onMount(() => {
     document.addEventListener("click", (event) => {
@@ -30,15 +18,14 @@
       let targetElement = event.target;
 
       do {
-        if (targetElement == datePickerButton) {
+        if (targetElement === datePickerButton) {
           datePickerVisible = !datePickerVisible;
           return
         }
-        if (targetElement == datePicker) {
+        if (targetElement === datePicker) {
           return
         }
-        // @ts-ignore
-        targetElement = targetElement.parentNode; 
+        targetElement = (targetElement as HTMLElement).parentNode;
       } while (targetElement);
       datePickerVisible = false;
     })
@@ -48,7 +35,7 @@
 
 <div class="counter">
   <div class="counter-viewport">
-    <input type="text" value={print_date(date)} class="counter-input" readonly>
+    <input type="text" value={toNorwegianShortDateString(date)} class="counter-input" readonly>
   </div>
 
   <button class="datepicker-button">

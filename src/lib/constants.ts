@@ -1,0 +1,1 @@
+export const HOLIDAYS_BASE_URI = 'https://webapi.no/api/v1/holidays/';

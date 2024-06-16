@@ -1,56 +1,22 @@
-<script>
-	import { onMount } from 'svelte';
+<script lang="ts">
+	import type { Holiday } from '$lib/types';
 	import DatePicker from './DatePicker.svelte';
 	import IntPicker from '$lib/components/IntPicker.svelte';
-	import { get_holiday_description, find_next_day } from '../utils/date-utils';
+	import { get_holiday_description, find_next_day, toNorwegianLongDateString, isRedDay } from '../utils/date-utils';
+
+	export let holidays: Holiday[];
 
 	let number_of_doses = 30;
 	let doses_daily = 1;
 	let start_date = new Date();
+
 	$: next_date = find_next_day(number_of_doses, doses_daily, start_date);
-	$: next_date_str = print_date(next_date);
+	$: next_date_str = toNorwegianLongDateString(next_date);
 	$: holiday_description = get_holiday_description(next_date, holidays);
 	$: holiday_description_view = holidays.length === 0
 		? ""
 		: ` (${holiday_description})`;
-	$: date_style = check_if_red_day(holiday_description); 
-	/**
-	 * @type {any[]}
-	 */
-	let holidays = [];
-
-	onMount(async () => {
-		await fetch_holidays();
-	});
-
-	/**
-	 * @param {String} desc
-	 */
-	const check_if_red_day = (desc) => {
-		if (["Ukedag", "Lørdag"].includes(desc)) return "";
-		return "red";
-	}
-
-	const fetch_holidays = (async () => {
-		const url = "https://webapi.no/api/v1/holidays/" + next_date.getFullYear();
-		const response = await fetch(url);
-		const data = await response.json();
-		holidays = data.data;
-	});
-
-	/**
-	 * @param {Date} date
-	 */
-	 const print_date = (date) => {
-		const options = {
-			weekday: "long",
-			month: "long",
-			day: "numeric",
-			year: "numeric",
-		};
-		// @ts-ignore
-		return date.toLocaleDateString("no-NO", options)
-	}
+	$: date_style = isRedDay(holiday_description) ? "red" : "";
 </script>
 
 <div>

@@ -1,17 +1,18 @@
 <script>
 	import Calendar from '$lib/components/Calendar.svelte';
+	import { page } from '$app/stores';
 </script>
 
 <section>
 	<h1>
-		Når må medisinen fornyes?
+		Når må resepten fornyes?
 	</h1>
 
 	<h2>
 		En app for å hjelpe leger med resepter
 	</h2>
 
-	<Calendar />
+	<Calendar holidays={$page.data.holidays}  />
 </section>
 
 <style>

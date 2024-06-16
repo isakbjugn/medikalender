@@ -1,3 +1,4 @@
+import type { Holiday } from '$lib/types';
 
 const is_same_day = (d1: Date, d2: Date): boolean => {
   return d1.getFullYear() === d2.getFullYear() &&
@@ -5,7 +6,7 @@ const is_same_day = (d1: Date, d2: Date): boolean => {
     d1.getMonth() === d2.getMonth();
 }
 
-export  const get_holiday_description = (date: Date, holidays: any[]) => {
+export  const get_holiday_description = (date: Date, holidays: Holiday[]) => {
   if (holidays.length === 0) {
     return ""
   }
@@ -37,3 +38,24 @@ export const get_last_day_of_next_year = (): Date => {
   const today = new Date();
   return new Date(today.getFullYear() + 1, 11, 31);
 }
+
+export const toNorwegianLongDateString = (date: Date) => {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+  return date.toLocaleDateString("no-NO", options)
+}
+
+export const toNorwegianShortDateString = (date: Date) => {
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short",
+    day: "numeric",
+  };
+  return date.toLocaleDateString("no-NO", options)
+}
+
+export const isRedDay = (description: string) =>
+  !(["Ukedag", "Lørdag"].includes(description));
