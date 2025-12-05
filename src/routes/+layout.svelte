@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-		<p>Laget av Isak Kyrre Lichtwarck Bjugn (isakbjugn(at)gmail.com)</p>
+		<p>Laget av <a href="https://github.com/isakbjugn">Isak Kyrre Lichtwarck Bjugn</a> (isakbjugn(at)gmail.com)</p>
 	</footer>
 </div>
 
